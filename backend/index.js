@@ -5,18 +5,18 @@ const mongoose = require('mongoose');
 require('dotenv/config');
 
 const app = express();
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', routesHandler);
 
 // DB Connection
-mongoose.connect(process.env.DB_URI, {useNewUrlParser:true, useUnifiedTopology:true})
-.then( () => {
-    console.log('DB Connected!');
-})
-.catch( (err) => {
-    console.log(err);
-});
+mongoose.connect(process.env.DB_URI || "mongodb://localhost/users", { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log('DB Connected!');
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 /*
 if (process.env.NODE_ENV === 'production') {
