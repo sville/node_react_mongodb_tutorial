@@ -2,18 +2,34 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    username: {type:String, required:true},
-    fullname: {type:String, required:true},
-    entryDate: {type:Date, default:Date.now}
+    username: { type: String, required: true },
+    fullname: { type: String, required: true },
+    entryDate: { type: Date, default: Date.now }
 });
 
 const tweetSchema = new Schema({
-    tweet: {type:String, required:true},
-    user: {type:Schema.Types.ObjectId, ref:'users'}
+    tweet: { type: String, required: true },
+    user: { type: Schema.Types.ObjectId, ref: 'users' }
 });
 
+const tableKeysSchema = new mongoose.Schema({
+
+    RECNAME: {
+        type: String,
+        required: true
+    }, FIELDNAME: {
+        type: String,
+        required: true
+    },
+    FIELDNUM: {
+        type: Number,
+        required: true
+    }
+})
+
+const TableKeys = mongoose.model('tableKeys', tableKeysSchema, 'tableKeys')
 const Users = mongoose.model('users', userSchema, 'users');
 const Tweets = mongoose.model('tweets', tweetSchema, 'tweets');
-const mySchemas = {'Users':Users, 'Tweets':Tweets};
+const mySchemas = { 'Users': Users, 'Tweets': Tweets, 'TableKeys': TableKeys };
 
 module.exports = mySchemas;

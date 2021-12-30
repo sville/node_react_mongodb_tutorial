@@ -3,11 +3,15 @@ const bodyParser = require('body-parser');
 const routesHandler = require('./routes/handler.js');
 const mongoose = require('mongoose');
 require('dotenv/config');
+//const bodyParser = require('body-parser')
+
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', routesHandler);
+//app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
+
 
 // DB Connection
 mongoose.connect(process.env.DB_URI || "mongodb://localhost/users", { useNewUrlParser: true, useUnifiedTopology: true })
@@ -17,6 +21,11 @@ mongoose.connect(process.env.DB_URI || "mongodb://localhost/users", { useNewUrlP
     .catch((err) => {
         console.log(err);
     });
+
+const PORT = process.env.PORT || 4000; // backend routing port
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}.`);
+});
 
 /*
 if (process.env.NODE_ENV === 'production') {
@@ -29,8 +38,3 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 */
-
-const PORT = process.env.PORT || 4000; // backend routing port
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
-});

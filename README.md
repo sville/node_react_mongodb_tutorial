@@ -1,8 +1,8 @@
 # Node, React, and Mongoose database Tutorial
 
-# Signup for free at mongodb.com
+## Signup for free at mongodb.com
 
-# This is a continuation from the previous tutorial "Node and React JS Tutorial"
+## This is a continuation from the previous tutorial "Node and React JS Tutorial"
 
 This tutorial will cover the following:
 
@@ -19,6 +19,8 @@ This tutorial will cover the following:
 6. Setting up a form to submit the tweet data.
 
 7. Finally, a demo of the finished project by running the backend and the frontend servers to send tweets.
+
+## Mongodb
 
 use users
 db.getCollectionNames()

@@ -11,6 +11,7 @@ function TableKeys() {
     const fetchItems = async () => {
         const data = await fetch('/tableKeys');
         const items = await data.json();
+
         setItems(items);
     };
 
@@ -22,8 +23,9 @@ function TableKeys() {
                         <div class="card-deck">
                             <div class="card">
                                 <div class="card-body p-1">
-                                    <h6 class="card-title">TableKeys</h6>
-
+                                    <h6 class="card-title">{item.RECNAME} </h6>
+                                    <h6 class="card-title">{item.FIELDNAME} </h6>
+                                    <h6 class="card-title">{item.FIELDNUM} </h6>
                                 </div>
                             </div>
                         </div>
