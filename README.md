@@ -36,10 +36,12 @@ tweets
 users
 users> db.tweets.find()
 
-## start node_react_mongodb_tutorial
+-- start node_react_mongodb_tutorial
 
-- cd backend
-- npm run server
+### `cd backend`
 
-- cd ../frontend
-- npm start
+### `npm run server`
+
+### `cd ../frontend`
+
+### `npm start`
