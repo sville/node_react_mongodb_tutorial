@@ -22,6 +22,8 @@ This tutorial will cover the following:
 
 ## Mongodb
 
+- mongosh commands:
+
 use users
 db.getCollectionNames()
 or
@@ -33,3 +35,11 @@ show collections
 tweets
 users
 users> db.tweets.find()
+
+## start node_react_mongodb_tutorial
+
+- cd backend
+- npm run server
+
+- cd ../frontend
+- npm start
