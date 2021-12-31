@@ -4,20 +4,42 @@ const Schemas = require('../models/Schemas.js');
 
 router.get('/tableKeys', async (req, res) => {
     const tableKeys = Schemas.TableKeys;
-    let searchOptions = { RECNAME: /^STDNT_CAR_TERM/ }
+    //const regex = new RegExp(escapeRegex(req.params.RECNAME));
+    //console.log({ RECNAME: regex })
 
-    if (req.query.RECNAME != null && req.query.RECNAME !== '') {
-        searchOptions.RECNAME = new RegExp(req.query.RECNAME, 'i')
-    }
     //const tableKeysData = await tableKeys.find({ FIELDNAME: 'EMPLID', FIELDNUM: 1 }, (err, tableKeysData) => {
-    const tableKeysData = await tableKeys.find(searchOptions, (err, tableKeysData) => {
+    //const tableKeysData = await tableKeys.find(searchOptions, (err, tableKeysData) => {
+    const tableKeysData = await tableKeys.find({}, (err, tableKeysData) => {
+
         if (err) throw err;
         if (tableKeysData) {
             res.end(JSON.stringify(tableKeysData));
         } else {
             res.end();
         }
-    }).limit(10);
+    }).sort({ RECNAME: 1, FIELDNUM: 1 }).limit(1000);
+});
+
+router.get('/tableKeys/:RECNAME', async (req, res) => {
+    const tableKeys = Schemas.TableKeys;
+    const regex = new RegExp(escapeRegex(req.params.RECNAME));
+    console.log({ RECNAME: regex })
+
+    //const tableKeysData = await tableKeys.find({ FIELDNAME: 'EMPLID', FIELDNUM: 1 }, (err, tableKeysData) => {
+    //const tableKeysData = await tableKeys.find(searchOptions, (err, tableKeysData) => {
+    const tableKeysData = await tableKeys.find({ RECNAME: regex }, (err, tableKeysData) => {
+
+        if (err) throw err;
+        if (tableKeysData) {
+            res.end(JSON.stringify(tableKeysData));
+        } else {
+            res.end();
+        }
+    }).sort({ RECNAME: 1, FIELDNUM: 1 }).limit(1000);
+});
+
+router.get('/f/:id', function (req, res) {
+    res.send(JSON.stringify(req.params));
 });
 /*
 router.get('/', async (req, res) => {
@@ -94,5 +116,7 @@ router.get('/addUser', async (req, res) => {
     }
 });
 */
-
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 module.exports = router;
